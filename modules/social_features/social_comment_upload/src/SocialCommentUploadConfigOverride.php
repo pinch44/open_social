@@ -36,24 +36,22 @@ class SocialCommentUploadConfigOverride implements ConfigFactoryOverrideInterfac
 
       $third_party = $config->get('third_party_settings');
 
-      $third_party = [
-        'field_group' => [
-          'group_add_attachment' => [
-            'children' => [
-              'field_comment_files',
-            ],
-            'parent_name' => '',
-            'weight' => 20,
-            'format_type' => 'details',
-            'format_settings' => [
-              'label' => 'Add attachment',
-              'required_fields' => TRUE,
-              'id' => '',
-              'classes' => 'comment-attachments',
-              'open' => FALSE,
-            ],
-            'label' => 'Add attachment',
+      $third_party['field_group'] = [
+        'group_add_attachment' => [
+          'children' => [
+            'field_comment_files',
           ],
+          'parent_name' => '',
+          'weight' => 20,
+          'format_type' => 'details',
+          'format_settings' => [
+            'label' => 'Add attachment',
+            'required_fields' => TRUE,
+            'id' => '',
+            'classes' => 'comment-attachments',
+            'open' => FALSE,
+          ],
+          'label' => 'Add attachment',
         ],
       ];
 

@@ -20,17 +20,19 @@ class SocialCommentUploadConfigOverride implements ConfigFactoryOverrideInterfac
    */
   public function loadOverrides($names) {
     $overrides = [];
+
+    /** @var \Drupal\Core\Config\ConfigFactoryInterface $config_factory */
     $config_factory = \Drupal::service('config.factory');
 
     // Check the settings first and leave.
-    if ($config_factory->getEditable('social_comment_upload.settings')->get('allow_upload_comments') == FALSE) {
+    if ($config_factory->get('social_comment_upload.settings')->get('allow_upload_comments') == FALSE) {
       return $overrides;
     }
 
     // Add field_group and field_comment_files.
     $config_name = 'core.entity_form_display.comment.comment.default';
     if (in_array($config_name, $names)) {
-      $config = $config_factory->getEditable($config_name);
+      $config = $config_factory->get($config_name);
 
       $third_party = $config->get('third_party_settings');
 
@@ -73,7 +75,7 @@ class SocialCommentUploadConfigOverride implements ConfigFactoryOverrideInterfac
     // Add field_comment_files.
     $config_name = 'core.entity_view_display.comment.comment.default';
     if (in_array($config_name, $names)) {
-      $config = $config_factory->getEditable($config_name);
+      $config = $config_factory->get($config_name);
 
       $content = $config->get('content');
       $content['field_comment_files'] = [

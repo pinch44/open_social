@@ -18,13 +18,14 @@ use Drupal\views\Views;
  *   Return location of event to take place.
  */
 function social_content_export_event_location(ContentEntityInterface $entity) {
-  $query = \Drupal::database()->select('node__field_event_location', 'nfel');
-  $query->addField('nfel', 'field_event_location_value');
-  $query->condition('nfel.entity_id', $entity->id());
-
-  return $query
-    ->execute()
-    ->fetchField();
+  // Get location of event
+  if ($location = $entity->get('field_event_location')->value) {
+    return $location;
+  }
+  else {
+    $location = 'Unspecified location';
+    return $location;
+  }
 }
 
 /**
@@ -37,13 +38,14 @@ function social_content_export_event_location(ContentEntityInterface $entity) {
  *   Returns address of event.
  */
 function social_content_export_event_host(ContentEntityInterface $entity) {
-  $query = \Drupal::database()->select('node__field_event_address', 'ad');
-  $query->addField('ad', 'field_event_address_locality');
-  $query->condition('ad.entity_id', $entity->id());
-
-  return $query
-    ->execute()
-    ->fetchField();
+  // Get location of event
+  if ($host = $entity->get('field_event_address')->locality) {
+    return $host;
+  }
+  else {
+    $host = 'Unspecified location';
+    return $host;
+  }
 }
 
 /**
@@ -75,13 +77,20 @@ function social_content_export_event_participant(ContentEntityInterface $entity)
  *   Return event title.
  */
 function social_content_export_event_title(ContentEntityInterface $entity) {
-  $query = \Drupal::database()->select('node_field_data', 'nfd');
-  $query->addField('nfd', 'title');
-  $query->condition('nfd.nid', $entity->id());
-
-  return $query
-    ->execute()
-    ->fetchField();
+  if ($host = $entity->get('title')->value) {
+    return $host;
+  }
+  else {
+    $host = 'Unspecified location';
+    return $host;
+  }
+//  $query = \Drupal::database()->select('node_field_data', 'nfd');
+//  $query->addField('nfd', 'title');
+//  $query->condition('nfd.nid', $entity->id());
+//
+//  return $query
+//    ->execute()
+//    ->fetchField();
 }
 
 /**

@@ -24,6 +24,7 @@ class ExportContent extends PrivateTempStoreFactory {
    *   Context of the operation.
    */
   public static function exportContentOperation(ContentEntityInterface $entity, array &$context) {
+
     $bundle = $entity->bundle();
     switch ($bundle) {
       case 'event':
